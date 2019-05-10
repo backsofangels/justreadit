@@ -6,14 +6,14 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/scancode_sliding_tabs"
+        android:id="@+id/main_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         app:tabMode="fixed" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/scancode_viewpager"
+        android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white" />
