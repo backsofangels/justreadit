@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.widget.Toast;
 
 import com.backsofangels.justreadit.R;
+import com.backsofangels.justreadit.ui.linkhistoryfragment.LinkHistoryFragment;
+import com.backsofangels.justreadit.ui.qrcodefragment.QRCodeReaderFragment;
 
 public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
     private Context mContext;
@@ -21,9 +23,9 @@ public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                //return QRCodeScanFragment;
+                return new QRCodeReaderFragment();
             case 1:
-                //return ScanHistoryFragment;
+                return new LinkHistoryFragment();
             default:
                 Toast.makeText(mContext, "Ops, something went wrong", Toast.LENGTH_LONG).show();
         }
