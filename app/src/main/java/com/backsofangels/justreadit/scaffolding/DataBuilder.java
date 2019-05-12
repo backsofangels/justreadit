@@ -23,6 +23,7 @@ public class DataBuilder {
     }
 
     //Returns a variable number of links defined with the param arrayLength
+    //TODO: Refactor the following with a more functional approach
     public ArrayList<ScannedLink> createLinkArrayList(int arrayLength) {
         ArrayList<ScannedLink> linkList = new ArrayList<>();
 
