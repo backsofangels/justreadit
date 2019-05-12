@@ -37,5 +37,6 @@ public class LinkHistoryFragment extends Fragment {
         linkHistoryRecyclerView.setHasFixedSize(true);
         linkHistoryAdapter = new LinkHistoryRecyclerViewAdapter(linkList, getActivity().getApplicationContext());
         linkHistoryRecyclerView.setAdapter(linkHistoryAdapter);
+        linkHistoryRecyclerView.setLayoutManager(linkHistoryLayoutManager);
     }
 }
