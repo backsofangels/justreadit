@@ -28,7 +28,7 @@ public class LinkHistoryRecyclerViewAdapter extends RecyclerView.Adapter<LinkHis
     @NonNull
     public LinkHistoryRecyclerViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.linkhistory_recyclerview_cell_layout, parent, false);
-        return new LinkHistoryRecyclerViewViewHolder(v);
+        return new LinkHistoryRecyclerViewViewHolder(v, context);
     }
 
     @Override
