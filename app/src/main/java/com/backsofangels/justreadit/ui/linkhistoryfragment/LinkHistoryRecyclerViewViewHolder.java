@@ -18,6 +18,4 @@ public class LinkHistoryRecyclerViewViewHolder extends RecyclerView.ViewHolder {
         linkUrl = cellView.findViewById(R.id.recyclerview_cell_url);
         linkScanDate = cellView.findViewById(R.id.recyclerview_scandate);
     }
-
-
 }
