@@ -20,13 +20,10 @@ public class LinkHistoryRecyclerViewViewHolder extends RecyclerView.ViewHolder {
         cell = cellView.findViewById(R.id.recyclerview_cell);
         linkUrl = cellView.findViewById(R.id.recyclerview_cell_url);
         linkScanDate = cellView.findViewById(R.id.recyclerview_scandate);
-        cell.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkUrl.getText().toString()));
-                browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(browserIntent);
-            }
+        cell.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkUrl.getText().toString()));
+            browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(browserIntent);
         });
     }
 }
