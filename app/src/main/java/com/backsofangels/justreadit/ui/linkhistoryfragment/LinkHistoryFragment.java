@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.backsofangels.justreadit.R;
 import com.backsofangels.justreadit.model.ScannedLink;
+import com.backsofangels.justreadit.persistence.ScannedLinkDao;
 import com.backsofangels.justreadit.scaffolding.DataBuilder;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class LinkHistoryFragment extends Fragment {
     private RecyclerView.LayoutManager linkHistoryLayoutManager;
     private LinkHistoryRecyclerViewAdapter linkHistoryAdapter;
     private ArrayList<ScannedLink> linkList;
+    private ScannedLinkDao instance;
 
 
     @Override
@@ -29,10 +31,12 @@ public class LinkHistoryFragment extends Fragment {
         return v;
     }
 
+    //TODO: Aggiustare questo metodo che fa schifo al cazzo
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        linkList = DataBuilder.getInstance().createLinkArrayList(10);
+        instance = ScannedLinkDao.getInstance();
+        linkList = instance.retrieveLinks();
         linkHistoryLayoutManager = new LinearLayoutManager(getContext());
         linkHistoryRecyclerView.setHasFixedSize(true);
         linkHistoryAdapter = new LinkHistoryRecyclerViewAdapter(linkList, getActivity().getApplicationContext());

@@ -2,9 +2,13 @@ package com.backsofangels.justreadit.model;
 
 import java.util.Date;
 
-public class ScannedLink {
+import io.realm.RealmObject;
+
+public class ScannedLink extends RealmObject {
     private String Url;
     private Date scanDate;
+
+    public ScannedLink() {}
 
     public ScannedLink(String Url, Date scanDate) {
         this.Url = Url;
