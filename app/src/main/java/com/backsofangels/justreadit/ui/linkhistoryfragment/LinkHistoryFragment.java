@@ -17,10 +17,10 @@ import com.backsofangels.justreadit.scaffolding.DataBuilder;
 import java.util.ArrayList;
 
 public class LinkHistoryFragment extends Fragment {
-    private RecyclerView linkHistoryRecyclerView;
+    private static RecyclerView linkHistoryRecyclerView;
     private RecyclerView.LayoutManager linkHistoryLayoutManager;
-    private LinkHistoryRecyclerViewAdapter linkHistoryAdapter;
-    private ArrayList<ScannedLink> linkList;
+    private static LinkHistoryRecyclerViewAdapter linkHistoryAdapter;
+    private static ArrayList<ScannedLink> linkList;
     private ScannedLinkDao instance;
 
 
@@ -42,5 +42,11 @@ public class LinkHistoryFragment extends Fragment {
         linkHistoryAdapter = new LinkHistoryRecyclerViewAdapter(linkList, getActivity().getApplicationContext());
         linkHistoryRecyclerView.setAdapter(linkHistoryAdapter);
         linkHistoryRecyclerView.setLayoutManager(linkHistoryLayoutManager);
+    }
+
+    public static void updateData() {
+        linkList.clear();
+        linkList.addAll(ScannedLinkDao.getInstance().retrieveLinks());
+        linkHistoryAdapter.notifyDataSetChanged();
     }
 }
