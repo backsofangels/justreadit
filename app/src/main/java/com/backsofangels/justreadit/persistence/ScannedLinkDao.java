@@ -2,8 +2,10 @@ package com.backsofangels.justreadit.persistence;
 
 import com.backsofangels.justreadit.JustreaditApplication;
 import com.backsofangels.justreadit.model.ScannedLink;
+import com.backsofangels.justreadit.ui.linkhistoryfragment.LinkHistoryFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.exceptions.RealmException;
@@ -33,6 +35,8 @@ public class ScannedLinkDao {
         } catch (RealmException e) {
             System.out.println("Exception in saveLink, could not save the url");
             e.printStackTrace();
+        } finally {
+            LinkHistoryFragment.updateData();
         }
     }
 
