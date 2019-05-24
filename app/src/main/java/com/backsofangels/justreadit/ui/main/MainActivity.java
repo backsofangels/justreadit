@@ -21,8 +21,8 @@ import io.realm.RealmConfiguration;
 
 public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private ScannedLinkDao dao;
+    private static ViewPager viewPager;
+    private MainActivityFragmentPagerAdapter adapter;
     private Realm r;
     private static final int requestCode = 100;
 
@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         r = Realm.getDefaultInstance();
         ScannedLinkDao.getInstance().setRealm(r);
-        tabLayout = (TabLayout) findViewById(R.id.main_tablayout);
-        viewPager = (ViewPager) findViewById(R.id.main_viewpager);
-        MainActivityFragmentPagerAdapter adapter = new MainActivityFragmentPagerAdapter(this, getSupportFragmentManager());
+        tabLayout = findViewById(R.id.main_tablayout);
+        viewPager = findViewById(R.id.main_viewpager);
+        adapter = new MainActivityFragmentPagerAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -48,5 +48,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         r.close();
+    }
+
+    public static void changePage() {
+        viewPager.setCurrentItem(1, true);
     }
 }

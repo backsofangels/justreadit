@@ -1,6 +1,8 @@
 package com.backsofangels.justreadit.ui.qrcodefragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import com.backsofangels.justreadit.R;
 import com.backsofangels.justreadit.model.ScannedLink;
 import com.backsofangels.justreadit.persistence.ScannedLinkDao;
+import com.backsofangels.justreadit.ui.main.MainActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
@@ -40,6 +43,9 @@ public class QRCodeReaderFragment extends Fragment {
             scannedText = result.getText();
             ScannedLink l = new ScannedLink(scannedText, new Date());
             dao.saveLink(l);
+            Snackbar scanDoneNotification = Snackbar.make(getView(), "Link scannerizzato!", Snackbar.LENGTH_LONG);
+            scanDoneNotification.setAction("Vedi", new ChangePageListener());
+            scanDoneNotification.show();
         }
 
         @Override
@@ -48,8 +54,15 @@ public class QRCodeReaderFragment extends Fragment {
         }
     };
 
+    public class ChangePageListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            MainActivity.changePage();
+        }
+    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.qrcodefragment_layout, parent, false);
         barcodeView = v.findViewById(R.id.qrfragment_barcodeview);
         viewfinderView = v.findViewById(R.id.qrfragment_viewfinder);
