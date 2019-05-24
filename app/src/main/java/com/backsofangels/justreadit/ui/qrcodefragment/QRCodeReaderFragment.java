@@ -14,8 +14,10 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
+import com.journeyapps.barcodescanner.BarcodeView;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.journeyapps.barcodescanner.DefaultDecoderFactory;
+import com.journeyapps.barcodescanner.ViewfinderView;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,7 +25,8 @@ import java.util.Date;
 import java.util.List;
 
 public class QRCodeReaderFragment extends Fragment {
-    private DecoratedBarcodeView barcodeView;
+    private BarcodeView barcodeView;
+    private ViewfinderView viewfinderView;
     private String scannedText;
     private ScannedLinkDao dao;
 
@@ -37,7 +40,6 @@ public class QRCodeReaderFragment extends Fragment {
             scannedText = result.getText();
             ScannedLink l = new ScannedLink(scannedText, new Date());
             dao.saveLink(l);
-            barcodeView.setStatusText(scannedText);
         }
 
         @Override
@@ -49,7 +51,9 @@ public class QRCodeReaderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.qrcodefragment_layout, parent, false);
-        barcodeView = v.findViewById(R.id.qrcode_view);
+        barcodeView = v.findViewById(R.id.qrfragment_barcodeview);
+        viewfinderView = v.findViewById(R.id.qrfragment_viewfinder);
+        viewfinderView.setCameraPreview(barcodeView);
         return v;
     }
 
@@ -57,8 +61,7 @@ public class QRCodeReaderFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.QR_CODE);
-        barcodeView.getBarcodeView().setDecoderFactory(new DefaultDecoderFactory(formats));
-        barcodeView.initializeFromIntent(getActivity().getIntent());
+        barcodeView.setDecoderFactory(new DefaultDecoderFactory(formats));
         barcodeView.decodeContinuous(callback);
         dao = ScannedLinkDao.getInstance();
     }
@@ -73,21 +76,5 @@ public class QRCodeReaderFragment extends Fragment {
     public void onPause() {
         super.onPause();
         barcodeView.pause();
-    }
-
-    public void pause() {
-        barcodeView.pause();
-    }
-
-    public void resume() {
-        barcodeView.resume();
-    }
-
-    public void triggerScan() {
-        barcodeView.decodeSingle(callback);
-    }
-
-    public DecoratedBarcodeView getBarcodeView() {
-        return this.barcodeView;
     }
 }
