@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.backsofangels.justreadit.R;
 import com.backsofangels.justreadit.model.ScannedLink;
 import com.backsofangels.justreadit.persistence.ScannedLinkDao;
-import com.backsofangels.justreadit.ui.main.MainActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 public class QRCodeReaderFragment extends Fragment {
+    private ViewPager mainActivityViewPager;
     private BarcodeView barcodeView;
     private ViewfinderView viewfinderView;
     private String scannedText;
@@ -53,7 +54,7 @@ public class QRCodeReaderFragment extends Fragment {
     public class ChangePageListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            MainActivity.changePage();
+            mainActivityViewPager.setCurrentItem(1);
         }
     }
 
@@ -63,6 +64,7 @@ public class QRCodeReaderFragment extends Fragment {
         barcodeView = v.findViewById(R.id.qrfragment_barcodeview);
         viewfinderView = v.findViewById(R.id.qrfragment_viewfinder);
         viewfinderView.setCameraPreview(barcodeView);
+        mainActivityViewPager = getActivity().findViewById(R.id.main_viewpager);
         return v;
     }
 

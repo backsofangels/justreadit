@@ -14,7 +14,7 @@ public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
     private Context mContext;
     private int tabsNumber = 2;
 
-    public MainActivityFragmentPagerAdapter(Context context, FragmentManager fmanager) {
+    MainActivityFragmentPagerAdapter(Context context, FragmentManager fmanager) {
         super(fmanager);
         this.mContext = context;
     }

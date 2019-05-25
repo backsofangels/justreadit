@@ -14,7 +14,6 @@ import com.backsofangels.justreadit.persistence.ScannedLinkDao;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 
 public class LinkHistoryRecyclerViewAdapter extends RecyclerView.Adapter<LinkHistoryRecyclerViewViewHolder> {
