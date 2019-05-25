@@ -17,6 +17,7 @@ import com.backsofangels.justreadit.model.ScannedLink;
 import com.backsofangels.justreadit.persistence.ScannedLinkDao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class LinkHistoryFragment extends Fragment {
     private static RecyclerView linkHistoryRecyclerView;
@@ -40,6 +41,7 @@ public class LinkHistoryFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         instance = ScannedLinkDao.getInstance();
         linkList = instance.retrieveLinks();
+        Collections.reverse(linkList);
         linkHistoryLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linkHistoryRecyclerView.setHasFixedSize(true);
         linkHistoryAdapter = new LinkHistoryRecyclerViewAdapter(linkList, getActivity().getApplicationContext());
