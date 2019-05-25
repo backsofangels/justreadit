@@ -4,11 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.backsofangels.justreadit.R;
 import com.backsofangels.justreadit.model.ScannedLink;
 import com.backsofangels.justreadit.persistence.ScannedLinkDao;
@@ -18,10 +16,8 @@ import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.BarcodeView;
-import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.journeyapps.barcodescanner.DefaultDecoderFactory;
 import com.journeyapps.barcodescanner.ViewfinderView;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
@@ -39,8 +35,8 @@ public class QRCodeReaderFragment extends Fragment {
             if(result.getText() == null || result.getText().equals(scannedText)) {
                 return;
             }
-
             scannedText = result.getText();
+            System.out.println("Found QR. URI is " + scannedText);
             ScannedLink l = new ScannedLink(scannedText, new Date());
             dao.saveLink(l);
             Snackbar scanDoneNotification = Snackbar.make(getView(), "Link scannerizzato!", Snackbar.LENGTH_LONG);
@@ -81,13 +77,13 @@ public class QRCodeReaderFragment extends Fragment {
 
     @Override
     public void onResume() {
-        super.onResume();
         barcodeView.resume();
+        super.onResume();
     }
 
     @Override
     public void onPause() {
-        super.onPause();
         barcodeView.pause();
+        super.onPause();
     }
 }

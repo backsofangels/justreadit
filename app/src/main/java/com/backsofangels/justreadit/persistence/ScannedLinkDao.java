@@ -7,6 +7,8 @@ import com.backsofangels.justreadit.ui.linkhistoryfragment.LinkHistoryFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import io.realm.Realm;
 import io.realm.exceptions.RealmException;
 
@@ -38,6 +40,15 @@ public class ScannedLinkDao {
         } finally {
             LinkHistoryFragment.updateData();
         }
+    }
+
+    public void removeLinkFromRealm(ScannedLink link) {
+        r.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(@Nonnull Realm realm) {
+                link.deleteFromRealm();
+            }
+        });
     }
 
     public ArrayList<ScannedLink> retrieveLinks() {

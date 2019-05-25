@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 
 import com.backsofangels.justreadit.R;
 import com.backsofangels.justreadit.model.ScannedLink;
+import com.backsofangels.justreadit.persistence.ScannedLinkDao;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class LinkHistoryRecyclerViewAdapter extends RecyclerView.Adapter<LinkHistoryRecyclerViewViewHolder> {
-    private ArrayList<ScannedLink> linkHistoryDataset;
+    ArrayList<ScannedLink> linkHistoryDataset;
     private Context context;
 
     public LinkHistoryRecyclerViewAdapter (ArrayList<ScannedLink> dataset, Context context) {
@@ -52,10 +53,10 @@ public class LinkHistoryRecyclerViewAdapter extends RecyclerView.Adapter<LinkHis
         notifyDataSetChanged();
     }
 
-    public void remove(ScannedLink data) {
-        int pos = linkHistoryDataset.indexOf(data);
-        linkHistoryDataset.remove(data);
-        notifyItemRemoved(pos);
+    public void remove(int position) {
+        ScannedLinkDao.getInstance().removeLinkFromRealm(linkHistoryDataset.get(position));
+        linkHistoryDataset.remove(position);
+        notifyItemRemoved(position);
     }
 
     private String dateFormatter(Date date) {
