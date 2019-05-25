@@ -13,7 +13,6 @@ import com.backsofangels.justreadit.ui.qrcodefragment.QRCodeReaderFragment;
 public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
     private Context mContext;
     private int tabsNumber = 2;
-    private QRCodeReaderFragment qrFragment;
 
     public MainActivityFragmentPagerAdapter(Context context, FragmentManager fmanager) {
         super(fmanager);

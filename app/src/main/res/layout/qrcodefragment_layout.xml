@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+    android:id="@+id/qrfragment_coordinator_layout">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:zxing_use_texture_view="false"
-        app:zxing_preview_scaling_strategy="centerCrop"
-        android:id="@+id/qrcode_view"
-        android:layout_marginBottom="32dp"/>
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="64dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin">
 
+            <com.journeyapps.barcodescanner.BarcodeView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/qrfragment_barcodeview"
+                />
 
-</LinearLayout>
+            <com.journeyapps.barcodescanner.ViewfinderView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/qrfragment_viewfinder"/>
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
+
