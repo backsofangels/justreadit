@@ -14,13 +14,14 @@ import com.backsofangels.justreadit.persistence.ScannedLinkDao;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 public class LinkHistoryRecyclerViewAdapter extends RecyclerView.Adapter<LinkHistoryRecyclerViewViewHolder> {
-    ArrayList<ScannedLink> linkHistoryDataset;
+    private ArrayList<ScannedLink> linkHistoryDataset;
     private Context context;
 
-    public LinkHistoryRecyclerViewAdapter (ArrayList<ScannedLink> dataset, Context context) {
+    LinkHistoryRecyclerViewAdapter (ArrayList<ScannedLink> dataset, Context context) {
         this.linkHistoryDataset = dataset;
         this.context = context;
     }
@@ -48,12 +49,14 @@ public class LinkHistoryRecyclerViewAdapter extends RecyclerView.Adapter<LinkHis
         super.onAttachedToRecyclerView(r);
     }
 
-    public void insert(int position, ScannedLink data) {
-        linkHistoryDataset.add(position, data);
+    public void update() {
+        linkHistoryDataset.clear();
+        linkHistoryDataset = ScannedLinkDao.getInstance().retrieveLinks();
+        Collections.reverse(linkHistoryDataset);
         notifyDataSetChanged();
     }
 
-    public void remove(int position) {
+    void remove(int position) {
         ScannedLinkDao.getInstance().removeLinkFromRealm(linkHistoryDataset.get(position));
         linkHistoryDataset.remove(position);
         notifyItemRemoved(position);
