@@ -1,11 +1,9 @@
 package com.backsofangels.justreadit.persistence;
 
-import com.backsofangels.justreadit.JustreaditApplication;
 import com.backsofangels.justreadit.model.ScannedLink;
-import com.backsofangels.justreadit.ui.linkhistoryfragment.LinkHistoryFragment;
+import com.backsofangels.justreadit.ui.linkhistoryfragment.LinkHistoryRecyclerViewAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.Nonnull;
 
@@ -14,6 +12,7 @@ import io.realm.exceptions.RealmException;
 
 public class ScannedLinkDao {
     private static ScannedLinkDao instance;
+    private LinkHistoryRecyclerViewAdapter adapter; //Need it to call the update
     private Realm r;
 
     private ScannedLinkDao() {}
@@ -23,6 +22,10 @@ public class ScannedLinkDao {
             instance = new ScannedLinkDao();
         }
         return instance;
+    }
+
+    public void setAdapter(LinkHistoryRecyclerViewAdapter linkAdapter) {
+        this.adapter = linkAdapter;
     }
 
     public void setRealm(Realm activityRealm) {
@@ -38,7 +41,7 @@ public class ScannedLinkDao {
             System.out.println("Exception in saveLink, could not save the url");
             e.printStackTrace();
         } finally {
-            LinkHistoryFragment.updateData();
+            adapter.update();
         }
     }
 

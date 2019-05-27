@@ -17,13 +17,14 @@ import com.backsofangels.justreadit.model.ScannedLink;
 import com.backsofangels.justreadit.persistence.ScannedLinkDao;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
+import javax.annotation.Nonnull;
 
 public class LinkHistoryFragment extends Fragment {
-    private static RecyclerView linkHistoryRecyclerView;
-    private LinearLayoutManager linkHistoryLayoutManager;
-    private static LinkHistoryRecyclerViewAdapter linkHistoryAdapter;
+    private RecyclerView linkHistoryRecyclerView;
+    private LinkHistoryRecyclerViewAdapter linkHistoryAdapter;
     private static ArrayList<ScannedLink> linkList;
-    private ScannedLinkDao instance;
     private LinkHistorySwipeController controller;
 
 
@@ -34,39 +35,45 @@ public class LinkHistoryFragment extends Fragment {
         return v;
     }
 
-    //TODO: Aggiustare questo metodo che fa schifo al cazzo
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        instance = ScannedLinkDao.getInstance();
-        linkList = instance.retrieveLinks();
-        linkHistoryLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        fillDataset();
+        setupView();
+        setupRecyclerViewHelpers();
+        ScannedLinkDao.getInstance().setAdapter(linkHistoryAdapter);
+    }
+
+    private void fillDataset() {
+        linkList = ScannedLinkDao.getInstance().retrieveLinks();
+        Collections.reverse(linkList);
+    }
+
+    private void setupView() {
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linkHistoryRecyclerView.setHasFixedSize(true);
         linkHistoryAdapter = new LinkHistoryRecyclerViewAdapter(linkList, getActivity().getApplicationContext());
         linkHistoryRecyclerView.setAdapter(linkHistoryAdapter);
-        linkHistoryRecyclerView.setLayoutManager(linkHistoryLayoutManager);
-        DividerItemDecoration divider = new DividerItemDecoration(getActivity().getApplicationContext(), linkHistoryLayoutManager.getOrientation());
+        linkHistoryRecyclerView.setLayoutManager(manager);
+        DividerItemDecoration divider = new DividerItemDecoration(getActivity().getApplicationContext(), manager.getOrientation());
         linkHistoryRecyclerView.addItemDecoration(divider);
+    }
+
+    private void setupRecyclerViewHelpers() {
         controller = new LinkHistorySwipeController(new SwipeControllerActions() {
-           @Override
-           public void onRightClicked(int position) {
+            @Override
+            public void onRightClicked(int position) {
                 linkHistoryAdapter.remove(position);
-           }
+            }
         });
         ItemTouchHelper helper = new ItemTouchHelper(controller);
         helper.attachToRecyclerView(linkHistoryRecyclerView);
 
         linkHistoryRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
-            public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent) {
+            public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @Nonnull RecyclerView.State state) {
                 controller.onDraw(c);
             }
         });
-    }
-
-    public static void updateData() {
-        linkList.clear();
-        linkList.addAll(ScannedLinkDao.getInstance().retrieveLinks());
-        linkHistoryAdapter.notifyDataSetChanged();
     }
 }

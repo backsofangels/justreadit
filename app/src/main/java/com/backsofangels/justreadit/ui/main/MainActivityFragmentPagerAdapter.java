@@ -12,9 +12,8 @@ import com.backsofangels.justreadit.ui.qrcodefragment.QRCodeReaderFragment;
 
 public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
     private Context mContext;
-    private int tabsNumber = 2;
 
-    public MainActivityFragmentPagerAdapter(Context context, FragmentManager fmanager) {
+    MainActivityFragmentPagerAdapter(Context context, FragmentManager fmanager) {
         super(fmanager);
         this.mContext = context;
     }
@@ -35,7 +34,7 @@ public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return tabsNumber;
+        return 2;
     }
 
     @Override

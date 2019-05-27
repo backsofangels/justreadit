@@ -8,4 +8,6 @@
     <string name="acrareport_notificationchannel_name">Crash report</string>
     <string name="acrareport_notificationchannel_description">Notifica un crash che è poi possibile inviare allo sviluppatore</string>
     <string name="acrareport_notificationchannel_id">ACRA_crash_report</string>
+    <string name="menu_item_licenses">Licenze open source</string>
+    <string name="licenses">Questa app è stata realizzata secondo la licenza GNU GPL 3.0.\nL\'intero codice sorgente è visualizzabile al seguente link\n<a href="https://github.com/backsofangels/justreadit">https://github.com/backsofangels/justreadit</a>\nSono state usate le librerie open source Zxing, Zxing-android-embedded ed ACRA crash reports.\nPer qualsiasi necessità, domanda o feedback, contattami all\'indirizzo\nbacksofangels@gmail.com</string>
 </resources>
