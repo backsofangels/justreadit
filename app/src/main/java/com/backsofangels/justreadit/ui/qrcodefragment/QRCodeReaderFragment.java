@@ -64,14 +64,14 @@ public class QRCodeReaderFragment extends Fragment {
         barcodeView = v.findViewById(R.id.qrfragment_barcodeview);
         viewfinderView = v.findViewById(R.id.qrfragment_viewfinder);
         viewfinderView.setCameraPreview(barcodeView);
-        mainActivityViewPager = getActivity().findViewById(R.id.main_viewpager);
         return v;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.QR_CODE);
+        mainActivityViewPager = getActivity().findViewById(R.id.main_viewpager);
+        Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.AZTEC, BarcodeFormat.MAXICODE, BarcodeFormat.QR_CODE);
         barcodeView.setDecoderFactory(new DefaultDecoderFactory(formats));
         barcodeView.decodeContinuous(callback);
         dao = ScannedLinkDao.getInstance();

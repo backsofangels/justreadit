@@ -21,7 +21,7 @@ public class LinkHistorySwipeController extends Callback {
     private RecyclerView.ViewHolder currentItemHolder = null;
     private SwipeControllerActions actions;
 
-    public LinkHistorySwipeController(SwipeControllerActions swipeControllerActions) {
+    LinkHistorySwipeController(SwipeControllerActions swipeControllerActions) {
         this.actions = swipeControllerActions;
     }
 
@@ -144,21 +144,13 @@ public class LinkHistorySwipeController extends Callback {
         View itemView = holder.itemView;
         Paint p = new Paint();
 
-        RectF leftButton = new RectF(itemView.getLeft(), itemView.getTop(), itemView.getLeft() + buttonWidthWithoutPadding, itemView.getBottom());
-        p.setColor(Color.BLUE);
-        c.drawRoundRect(leftButton, corners, corners, p);
-        drawText("EDIT", c, leftButton, p);
-
         RectF rightButton = new RectF(itemView.getRight() - buttonWidthWithoutPadding, itemView.getTop(), itemView.getRight(), itemView.getBottom());
-        p.setColor(Color.RED);
+        p.setColor(Color.parseColor("#bd1a1a"));
         c.drawRoundRect(rightButton, corners, corners, p);
         drawText("Delete", c, rightButton, p);
 
         buttonInstance = null;
-        if (buttonState == LinkHistoryButtonState.LEFT_VISIBLE) {
-            buttonInstance = leftButton;
-        }
-        else if (buttonState == LinkHistoryButtonState.RIGHT_VISIBLE) {
+        if (buttonState == LinkHistoryButtonState.RIGHT_VISIBLE) {
             buttonInstance = rightButton;
         }
     }
@@ -173,7 +165,7 @@ public class LinkHistorySwipeController extends Callback {
         c.drawText(text, button.centerX() - (textWidth / 2), button.centerY() + (textSize/2), p);
     }
 
-    public void onDraw(Canvas c) {
+    void onDraw(Canvas c) {
         if (currentItemHolder != null) {
             drawButtons(c, currentItemHolder);
         }
