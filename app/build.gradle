@@ -10,15 +10,15 @@ android {
         applicationId "com.backsofangels.justreadit"
         minSdkVersion 26
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.0.2"
+        versionCode 1
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.debug
         maxSdkVersion 28
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
