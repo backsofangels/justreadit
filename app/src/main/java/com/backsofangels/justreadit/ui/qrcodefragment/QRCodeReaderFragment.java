@@ -37,11 +37,10 @@ public class QRCodeReaderFragment extends Fragment {
                 return;
             }
             scannedText = result.getText();
-            System.out.println("Found QR. URI is " + scannedText);
             ScannedLink l = new ScannedLink(scannedText, new Date());
             dao.saveLink(l);
-            Snackbar scanDoneNotification = Snackbar.make(getView(), "Link scannerizzato!", Snackbar.LENGTH_LONG);
-            scanDoneNotification.setAction("Vedi", new ChangePageListener());
+            Snackbar scanDoneNotification = Snackbar.make(getView(), "Link scanned!", Snackbar.LENGTH_LONG);
+            scanDoneNotification.setAction("Go", new ChangePageListener());
             scanDoneNotification.show();
         }
 

@@ -4,10 +4,10 @@
     <string name="scanhistory_tab_title">Link history</string>
     <string name="acrareport_mailsubject">ACRA JustReadIt crash report</string>
     <string name="acrareport_notification_title">Just Read it crash!</string>
-    <string name="acrareport_notification_text">Ops, Just Read It è crashata. Mandami un report per risolvere il problema!</string>
+    <string name="acrareport_notification_text">Ops, Just Read It crashed. Send a report to make me investigate!</string>
     <string name="acrareport_notificationchannel_name">Crash report</string>
-    <string name="acrareport_notificationchannel_description">Notifica un crash che è poi possibile inviare allo sviluppatore</string>
+    <string name="acrareport_notificationchannel_description">Notifies a crash and generates a report that can be sent to the developer</string>
     <string name="acrareport_notificationchannel_id">ACRA_crash_report</string>
-    <string name="menu_item_licenses">Licenze open source</string>
-    <string name="licenses">Questa app è stata realizzata secondo la licenza GNU GPL 3.0.\nL\'intero codice sorgente è visualizzabile al seguente link\n<a href="https://github.com/backsofangels/justreadit">https://github.com/backsofangels/justreadit</a>\nSono state usate le librerie open source Zxing, Zxing-android-embedded ed ACRA crash reports.\nPer qualsiasi necessità, domanda o feedback, contattami all\'indirizzo\nbacksofangels@gmail.com</string>
+    <string name="menu_item_licenses">Open source licenses</string>
+    <string name="licenses">This app was developed under GNU GPL 3.0.\nThe whole source code can be seen at\n<a href="https://github.com/backsofangels/justreadit">https://github.com/backsofangels/justreadit</a>\nThe libraries Zxing, Zxing-android-embedded and ACRA crash reports have been used.\nFor every question or feedback, mail me to\nbacksofangels@gmail.com</string>
 </resources>
