@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.open_source_licenses) {
-            System.out.println("starto la nuova activity");
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
             return true;

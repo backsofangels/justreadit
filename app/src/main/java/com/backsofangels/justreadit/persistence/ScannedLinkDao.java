@@ -56,7 +56,6 @@ public class ScannedLinkDao {
 
     public ArrayList<ScannedLink> retrieveLinks() {
         ArrayList<ScannedLink> queryResult = new ArrayList<>();
-        System.out.println("Retrieving");
         try {
             queryResult.addAll(r.where(ScannedLink.class).findAll());
         } catch (RealmException e) {
