@@ -9,5 +9,6 @@
     <string name="acrareport_notificationchannel_description">Notifies a crash and generates a report that can be sent to the developer</string>
     <string name="acrareport_notificationchannel_id">ACRA_crash_report</string>
     <string name="menu_item_licenses">Open source licenses</string>
-    <string name="licenses">This app was developed under GNU GPL 3.0.\nThe whole source code can be seen at\n<a href="https://github.com/backsofangels/justreadit">https://github.com/backsofangels/justreadit</a>\nThe libraries Zxing, Zxing-android-embedded and ACRA crash reports have been used.\nFor every question or feedback, mail me to\nbacksofangels@gmail.com</string>
+    <string name="menu_item_privacy_policy">Privacy policy</string>
+    <string name="licenses">This app was developed under GNU GPL 3.0.\nThe whole source code can be seen at\n<a href="https://github.com/backsofangels/justreadit">https://github.com/backsofangels/justreadit</a>\n\nThe libraries Zxing, Zxing-android-embedded and Realm-java have been used.\n\nFor every question or feedback, mail me to\nbacksofangels@gmail.com</string>
 </resources>

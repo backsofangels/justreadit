@@ -2,5 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/open_source_licenses"
         android:title="@string/menu_item_licenses"/>
+    <item android:id="@+id/menu_item_privacy_policy"
+        android:title="@string/menu_item_privacy_policy"/>
 
 </menu>
