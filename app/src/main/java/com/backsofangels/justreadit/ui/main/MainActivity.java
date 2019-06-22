@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.backsofangels.justreadit.R;
 import com.backsofangels.justreadit.persistence.ScannedLinkDao;
 import com.backsofangels.justreadit.ui.menu.MenuActivity;
+import com.backsofangels.justreadit.ui.menu.PrivacyPolicyActivity;
 
 
 import io.realm.Realm;
@@ -52,11 +53,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.open_source_licenses) {
-            Intent intent = new Intent(this, MenuActivity.class);
-            startActivity(intent);
-            return true;
-        } else return false;
+        switch(item.getItemId()) {
+            case R.id.open_source_licenses:
+                Intent intent = new Intent(this, MenuActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_item_privacy_policy:
+                Intent intentPolicy = new Intent(this, PrivacyPolicyActivity.class);
+                startActivity(intentPolicy);
+                return true;
+                default:
+                    return false;
+        }
     }
 
     private void setupViewComponents() {
