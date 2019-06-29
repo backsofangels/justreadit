@@ -1,6 +1,9 @@
 package com.backsofangels.justreadit.ui.linkhistoryfragment;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
@@ -29,7 +32,19 @@ public class LinkHistoryRecyclerViewAdapter extends RecyclerView.Adapter<LinkHis
     @NonNull
     public LinkHistoryRecyclerViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.linkhistory_recyclerview_cell_layout, parent, false);
-        return new LinkHistoryRecyclerViewViewHolder(v, context);
+        return new LinkHistoryRecyclerViewViewHolder(v, context, new PopupMenuActions() {
+            @Override
+            public void onCopyPressed(int position) {
+                ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("url to copy", linkHistoryDataset.get(position).getUrl());
+                clipboardManager.setPrimaryClip(clip);
+            }
+
+            @Override
+            public void onDeletePressed(int position) {
+                remove(position);
+            }
+        });
     }
 
     @Override

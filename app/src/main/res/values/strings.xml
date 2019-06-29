@@ -8,4 +8,8 @@
     <string name="link_scanned_message">Link scanned!</string>
     <string name="link_scanned_go">GO</string>
     <string name="swipe_recycler_view_delete">Delete</string>
+    <string name="recyclerview_popup_share">Share</string>
+    <string name="recyclerview_popup_copy">Copy to clipboard</string>
+    <string name="recyclerview_popup_delete">Delete</string>
+    <string name="recyclerview_cell_send_to">Share with</string>
 </resources>
