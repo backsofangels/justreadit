@@ -13,7 +13,6 @@ import com.backsofangels.justreadit.model.ScannedLink;
 import com.backsofangels.justreadit.persistence.ScannedLinkDao;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
@@ -63,8 +62,6 @@ public class LinkHistoryRecyclerViewAdapter extends RecyclerView.Adapter<LinkHis
     }
 
     private String dateFormatter(Date date) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        return DateFormat.format("dd/MM/yyyy", cal).toString();
+        return DateFormat.getDateFormat(context).format(date);
     }
 }

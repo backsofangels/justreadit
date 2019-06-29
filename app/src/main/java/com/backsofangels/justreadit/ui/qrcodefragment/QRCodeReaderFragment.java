@@ -29,26 +29,7 @@ public class QRCodeReaderFragment extends Fragment {
     private ViewfinderView viewfinderView;
     private String scannedText;
     private ScannedLinkDao dao;
-
-    private BarcodeCallback callback = new BarcodeCallback() {
-        @Override
-        public void barcodeResult(BarcodeResult result) {
-            if(result.getText() == null || result.getText().equals(scannedText)) {
-                return;
-            }
-            scannedText = result.getText();
-            ScannedLink l = new ScannedLink(scannedText, new Date());
-            dao.saveLink(l);
-            Snackbar scanDoneNotification = Snackbar.make(getView(), "Link scanned!", Snackbar.LENGTH_LONG);
-            scanDoneNotification.setAction("Go", new ChangePageListener());
-            scanDoneNotification.show();
-        }
-
-        @Override
-        public void possibleResultPoints(List<ResultPoint> resultPoints) {
-
-        }
-    };
+    private BarcodeCallback callback;
 
     public class ChangePageListener implements View.OnClickListener {
         @Override
@@ -71,6 +52,30 @@ public class QRCodeReaderFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mainActivityViewPager = getActivity().findViewById(R.id.main_viewpager);
         Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.AZTEC, BarcodeFormat.MAXICODE, BarcodeFormat.QR_CODE);
+
+        // The callback settings is needed to be done here apparently, because otherwise the application crashes
+        // when the strings are fetched.
+
+        this.callback = new BarcodeCallback() {
+            @Override
+            public void barcodeResult(BarcodeResult result) {
+                if(result.getText() == null || result.getText().equals(scannedText)) {
+                    return;
+                }
+                scannedText = result.getText();
+                ScannedLink l = new ScannedLink(scannedText, new Date());
+                dao.saveLink(l);
+                Snackbar scanDoneNotification = Snackbar.make(getView(), getString(R.string.link_scanned_message), Snackbar.LENGTH_LONG);
+                scanDoneNotification.setAction(R.string.link_scanned_go, new ChangePageListener());
+                scanDoneNotification.show();
+            }
+
+            @Override
+            public void possibleResultPoints(List<ResultPoint> resultPoints) {
+
+            }
+        };
+
         barcodeView.setDecoderFactory(new DefaultDecoderFactory(formats));
         barcodeView.decodeContinuous(callback);
         dao = ScannedLinkDao.getInstance();
