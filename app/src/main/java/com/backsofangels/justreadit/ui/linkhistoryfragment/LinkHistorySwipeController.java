@@ -20,9 +20,11 @@ public class LinkHistorySwipeController extends Callback {
     private RectF buttonInstance = null;
     private RecyclerView.ViewHolder currentItemHolder = null;
     private SwipeControllerActions actions;
+    private String deleteString;
 
-    LinkHistorySwipeController(SwipeControllerActions swipeControllerActions) {
+    LinkHistorySwipeController(SwipeControllerActions swipeControllerActions, String deleteString) {
         this.actions = swipeControllerActions;
+        this.deleteString = deleteString;
     }
 
     @Override
@@ -147,7 +149,7 @@ public class LinkHistorySwipeController extends Callback {
         RectF rightButton = new RectF(itemView.getRight() - buttonWidthWithoutPadding, itemView.getTop(), itemView.getRight(), itemView.getBottom());
         p.setColor(Color.parseColor("#bd1a1a"));
         c.drawRoundRect(rightButton, corners, corners, p);
-        drawText("Delete", c, rightButton, p);
+        drawText(deleteString, c, rightButton, p);
 
         buttonInstance = null;
         if (buttonState == LinkHistoryButtonState.RIGHT_VISIBLE) {

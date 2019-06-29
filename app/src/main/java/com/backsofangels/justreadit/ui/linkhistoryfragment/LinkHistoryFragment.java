@@ -65,7 +65,7 @@ public class LinkHistoryFragment extends Fragment {
             public void onRightClicked(int position) {
                 linkHistoryAdapter.remove(position);
             }
-        });
+        }, getString(R.string.swipe_recycler_view_delete));
         ItemTouchHelper helper = new ItemTouchHelper(controller);
         helper.attachToRecyclerView(linkHistoryRecyclerView);
 

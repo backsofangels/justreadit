@@ -23,10 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.menu.MenuActivity"
-            android:parentActivityName=".ui.main.MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.menu.PrivacyPolicyActivity"
+        <activity android:name=".ui.menu.PrivacyLicensesActivity"
             android:parentActivityName=".ui.main.MainActivity"
             android:screenOrientation="portrait"/>
     </application>
