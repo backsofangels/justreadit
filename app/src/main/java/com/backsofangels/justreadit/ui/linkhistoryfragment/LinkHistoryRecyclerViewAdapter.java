@@ -10,6 +10,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.backsofangels.justreadit.R;
 import com.backsofangels.justreadit.model.ScannedLink;
@@ -38,6 +39,7 @@ public class LinkHistoryRecyclerViewAdapter extends RecyclerView.Adapter<LinkHis
                 ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("url to copy", linkHistoryDataset.get(position).getUrl());
                 clipboardManager.setPrimaryClip(clip);
+                Toast.makeText(context, context.getResources().getString(R.string.copied_to_clipboard_toast), Toast.LENGTH_LONG).show();
             }
 
             @Override
