@@ -1,12 +1,16 @@
 package com.backsofangels.justreadit.ui.linkhistoryfragment;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.backsofangels.justreadit.R;
 import com.backsofangels.justreadit.model.ScannedLink;
@@ -29,7 +33,20 @@ public class LinkHistoryRecyclerViewAdapter extends RecyclerView.Adapter<LinkHis
     @NonNull
     public LinkHistoryRecyclerViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.linkhistory_recyclerview_cell_layout, parent, false);
-        return new LinkHistoryRecyclerViewViewHolder(v, context);
+        return new LinkHistoryRecyclerViewViewHolder(v, context, new PopupMenuActions() {
+            @Override
+            public void onCopyPressed(int position) {
+                ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("url to copy", linkHistoryDataset.get(position).getUrl());
+                clipboardManager.setPrimaryClip(clip);
+                Toast.makeText(context, context.getResources().getString(R.string.copied_to_clipboard_toast), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onDeletePressed(int position) {
+                remove(position);
+            }
+        });
     }
 
     @Override

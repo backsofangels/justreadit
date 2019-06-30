@@ -1,13 +1,11 @@
 package com.backsofangels.justreadit.ui.linkhistoryfragment;
 
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +17,10 @@ import com.backsofangels.justreadit.persistence.ScannedLinkDao;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import javax.annotation.Nonnull;
-
 public class LinkHistoryFragment extends Fragment {
     private RecyclerView linkHistoryRecyclerView;
     private LinkHistoryRecyclerViewAdapter linkHistoryAdapter;
     private static ArrayList<ScannedLink> linkList;
-    private LinkHistorySwipeController controller;
 
 
     @Override
@@ -40,7 +35,6 @@ public class LinkHistoryFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         fillDataset();
         setupView();
-        setupRecyclerViewHelpers();
         ScannedLinkDao.getInstance().setAdapter(linkHistoryAdapter);
     }
 
@@ -57,23 +51,5 @@ public class LinkHistoryFragment extends Fragment {
         linkHistoryRecyclerView.setLayoutManager(manager);
         DividerItemDecoration divider = new DividerItemDecoration(getActivity().getApplicationContext(), manager.getOrientation());
         linkHistoryRecyclerView.addItemDecoration(divider);
-    }
-
-    private void setupRecyclerViewHelpers() {
-        controller = new LinkHistorySwipeController(new SwipeControllerActions() {
-            @Override
-            public void onRightClicked(int position) {
-                linkHistoryAdapter.remove(position);
-            }
-        }, getString(R.string.swipe_recycler_view_delete));
-        ItemTouchHelper helper = new ItemTouchHelper(controller);
-        helper.attachToRecyclerView(linkHistoryRecyclerView);
-
-        linkHistoryRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @Nonnull RecyclerView.State state) {
-                controller.onDraw(c);
-            }
-        });
     }
 }

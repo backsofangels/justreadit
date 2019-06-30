@@ -9,4 +9,9 @@
     <string name="link_scanned_go">Vai</string>
     <string name="link_scanned_message">Link scannerizzato!</string>
     <string name="swipe_recycler_view_delete">Elimina</string>
+    <string name="recyclerview_popup_copy">Copia negli appunti</string>
+    <string name="recyclerview_popup_delete">Cancella</string>
+    <string name="recyclerview_popup_share">Condividi</string>
+    <string name="recyclerview_cell_send_to">Condividi con</string>
+    <string name="copied_to_clipboard_toast">Copiato negli appunti</string>
 </resources>

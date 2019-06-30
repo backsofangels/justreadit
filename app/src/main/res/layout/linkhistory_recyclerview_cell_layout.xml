@@ -7,25 +7,41 @@
     android:id="@+id/recyclerview_cell"
     android:clickable="true"
     android:focusable="true">
-    
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/recyclerview_cell_url"
-            android:maxLines="1"
-            android:textSize="18sp" />
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_weight="1">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_marginTop="8dp"
-            android:id="@+id/recyclerview_scandate"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerview_cell_url"
+                android:maxLines="1"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/recyclerview_scandate"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerview_cell_popup_menu_button"
+            android:src="@drawable/ic_baseline_more_vert_24px"
+            android:background="@null"
+            android:layout_weight="0"/>
+
     </LinearLayout>
 </android.support.v7.widget.CardView>
