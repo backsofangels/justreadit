@@ -8,7 +8,7 @@ android {
         applicationId "com.backsofangels.justreadit"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 2412102
+        versionCode 2612102
         versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.debug
