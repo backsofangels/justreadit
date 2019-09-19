@@ -31,6 +31,8 @@ public class QRCodeReaderFragment extends Fragment {
     private ScannedLinkDao dao;
     private BarcodeCallback callback;
 
+
+    //Internal class to change page programmatically after Snackback button press
     public class ChangePageListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -50,12 +52,15 @@ public class QRCodeReaderFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //This should NEVER give NPE, because the onActivityCreated ensures the activity exists before calling the findViewById
         mainActivityViewPager = getActivity().findViewById(R.id.main_viewpager);
+
+        //Sets the barcodes readable by the callback
         Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.AZTEC, BarcodeFormat.MAXICODE, BarcodeFormat.QR_CODE);
 
         // The callback settings is needed to be done here apparently, because otherwise the application crashes
         // when the strings are fetched.
-
         this.callback = new BarcodeCallback() {
             @Override
             public void barcodeResult(BarcodeResult result) {
@@ -81,6 +86,9 @@ public class QRCodeReaderFragment extends Fragment {
         dao = ScannedLinkDao.getInstance();
     }
 
+
+    //These two methods are called when transitioning to another activity
+    //TODO: call them also while transitioning to the other tab
     @Override
     public void onResume() {
         barcodeView.resume();

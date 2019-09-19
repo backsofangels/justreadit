@@ -33,17 +33,18 @@ public class LinkHistoryFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        fillDataset();
         setupView();
         ScannedLinkDao.getInstance().setAdapter(linkHistoryAdapter);
     }
 
+    //Check if this happens on UI thread or not (should this be done asynchrously?)
     private void fillDataset() {
         linkList = ScannedLinkDao.getInstance().retrieveLinks();
         Collections.reverse(linkList);
     }
 
     private void setupView() {
+        fillDataset();
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linkHistoryRecyclerView.setHasFixedSize(true);
         linkHistoryAdapter = new LinkHistoryRecyclerViewAdapter(linkList, getActivity().getApplicationContext());

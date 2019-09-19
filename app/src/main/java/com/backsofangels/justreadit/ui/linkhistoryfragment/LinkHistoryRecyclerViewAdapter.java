@@ -72,12 +72,13 @@ public class LinkHistoryRecyclerViewAdapter extends RecyclerView.Adapter<LinkHis
         notifyDataSetChanged();
     }
 
-    void remove(int position) {
+    private void remove(int position) {
         ScannedLinkDao.getInstance().removeLinkFromRealm(linkHistoryDataset.get(position));
         linkHistoryDataset.remove(position);
         notifyItemRemoved(position);
     }
 
+    //Updated to support every date format
     private String dateFormatter(Date date) {
         return DateFormat.getDateFormat(context).format(date);
     }

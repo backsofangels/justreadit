@@ -20,7 +20,7 @@ class LinkHistoryRecyclerViewViewHolder extends RecyclerView.ViewHolder {
     private ImageButton popupMenuButton;
     TextView linkUrl;
     TextView linkScanDate;
-    PopupMenuActions actions;
+    private PopupMenuActions actions;
 
     LinkHistoryRecyclerViewViewHolder (View cellView, final Context context, PopupMenuActions actions) {
         super(cellView);
@@ -29,12 +29,15 @@ class LinkHistoryRecyclerViewViewHolder extends RecyclerView.ViewHolder {
         linkScanDate = cellView.findViewById(R.id.recyclerview_scandate);
         popupMenuButton = cellView.findViewById(R.id.recyclerview_cell_popup_menu_button);
         cell.setOnClickListener(v -> {
+            //Open in browser intent
             if (URLUtil.isValidUrl(linkUrl.getText().toString())) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkUrl.getText().toString()));
                 browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(browserIntent);
             }
         });
+
+        this.actions = actions;
 
         popupMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +73,7 @@ class LinkHistoryRecyclerViewViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
-        this.actions = actions;
+
     }
 
     private String prepareLinkToShare(String url) {

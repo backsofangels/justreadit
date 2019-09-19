@@ -66,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(pager);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (pager.getCurrentItem() == 0) {
+            super.onBackPressed();
+        } else {
+            pager.setCurrentItem(pager.getCurrentItem() - 1);
+        }
+    }
+
     //Cares about closing the realm when the activity is terminated
     @Override
     protected void onDestroy() {
