@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.main.MainActivity"
-            android:screenOrientation="unspecified">
+            android:screenOrientation="unspecified"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
