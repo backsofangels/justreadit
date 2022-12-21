@@ -97,6 +97,7 @@ public class QRCodeReaderFragment extends Fragment {
 
     @Override
     public void onPause() {
+        barcodeView.stopDecoding();
         barcodeView.pause();
         super.onPause();
     }
