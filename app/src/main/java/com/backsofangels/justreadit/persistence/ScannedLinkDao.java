@@ -1,5 +1,7 @@
 package com.backsofangels.justreadit.persistence;
 
+import android.util.Log;
+
 import com.backsofangels.justreadit.model.ScannedLink;
 import com.backsofangels.justreadit.ui.linkhistoryfragment.LinkHistoryRecyclerViewAdapter;
 
@@ -38,7 +40,7 @@ public class ScannedLinkDao {
             r.copyToRealm(l);
             r.commitTransaction();
         } catch (RealmException e) {
-            System.out.println("Exception in saveLink, could not save the url");
+            Log.d(this.getClass().getCanonicalName(), "Exception in saving to realm");
             e.printStackTrace();
         } finally {
             adapter.update();
@@ -46,12 +48,7 @@ public class ScannedLinkDao {
     }
 
     public void removeLinkFromRealm(ScannedLink link) {
-        r.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(@Nonnull Realm realm) {
-                link.deleteFromRealm();
-            }
-        });
+        r.executeTransaction(realm -> link.deleteFromRealm());
     }
 
     public ArrayList<ScannedLink> retrieveLinks() {
@@ -59,7 +56,7 @@ public class ScannedLinkDao {
         try {
             queryResult.addAll(r.where(ScannedLink.class).findAll());
         } catch (RealmException e) {
-            System.out.println("Exception in retrieveLinks, could not retrieve");
+            Log.d(this.getClass().getCanonicalName(), "Exception in reading from realm");
             e.printStackTrace();
         }
         return queryResult;
