@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ public class LinkHistoryFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        Log.d(this.getClass().getCanonicalName(), " - Inflating fragment");
         View v = inflater.inflate(R.layout.linkhistory_layout, parent, false);
         linkHistoryRecyclerView = v.findViewById(R.id.linkhistory_recyclerview);
         return v;
@@ -33,6 +36,7 @@ public class LinkHistoryFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.d(this.getClass().getCanonicalName(), " - Activity created");
         setupView();
         ScannedLinkDao.getInstance().setAdapter(linkHistoryAdapter);
     }
