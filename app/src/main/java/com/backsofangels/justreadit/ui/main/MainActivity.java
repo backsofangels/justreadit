@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
 
-        askForCameraPermission(this, this, requestCode);
+        askForCameraPermission(this, this);
         setupViewComponents();
 
         r = Realm.getDefaultInstance();
@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Moved the permission logic in separate function
-    private void askForCameraPermission(Context context, Activity activity, int requestCode) {
+    private void askForCameraPermission(Context context, Activity activity) {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.CAMERA}, requestCode);
+            ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.CAMERA}, MainActivity.requestCode);
         }
     }
 }
